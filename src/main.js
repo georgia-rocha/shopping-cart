@@ -13,15 +13,20 @@ loading.className = 'loading';
 sectionProducts.appendChild(loading);
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
-
 const getProducts = async (value) => {
-  const products = await fetchProductsList(value);
+  try {
+    const products = await fetchProductsList(value);
 
-  sectionProducts.innerHTML = '';
-  /* console.log(products); */
-  products.forEach((product) => {
-    sectionProducts.appendChild(createProductElement(product));
-  });
+    sectionProducts.innerHTML = '';
+    products.forEach((product) => {
+      sectionProducts.appendChild(createProductElement(product));
+    });
+  } catch (err) {
+    const error = document.createElement('h2');
+    error.innerHTML = 'Algum erro ocorreu, recarregue a página e tente novamente';
+    error.className = 'error';
+    sectionProducts.appendChild(error);
+  }
 };
 
 window.onload = async () => {
