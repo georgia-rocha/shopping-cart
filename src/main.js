@@ -1,6 +1,7 @@
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
-import { createProductElement } from './helpers/shopFunctions';
+import { createProductElement, createCartProductElement } from './helpers/shopFunctions';
+import { saveCartID } from './helpers/cartFunctions';
 import './style.css';
 
 const searchButton = document.querySelector('#search-products');
@@ -23,11 +24,16 @@ const getProducts = async (value) => {
     });
 
     const buttonCart = document.querySelectorAll('.product__add');
+    const olCart = document.querySelector('.cart__products');
 
     buttonCart.forEach((button) => {
       button.addEventListener('click', async ({ target }) => {
         const { innerText } = target.parentElement.firstElementChild;
-        await fetchProduct(innerText);
+        const dadosProduct = await fetchProduct(innerText);
+
+        saveCartID(innerText);
+        const criandoEle = createCartProductElement(dadosProduct);
+        olCart.appendChild(criandoEle);
       });
     });
   } catch (err) {
