@@ -1,7 +1,7 @@
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createProductElement, createCartProductElement } from './helpers/shopFunctions';
-import { saveCartID } from './helpers/cartFunctions';
+import { saveCartID, getSavedCartIDs } from './helpers/cartFunctions';
 import './style.css';
 
 const searchButton = document.querySelector('#search-products');
@@ -14,6 +14,14 @@ loading.className = 'loading';
 sectionProducts.appendChild(loading);
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
+const olCart = document.querySelector('.cart__products');
+
+async function addCart(id) {
+  const dadosProduct = await fetchProduct(id);
+  const criandoEle = createCartProductElement(dadosProduct);
+  olCart.appendChild(criandoEle);
+}
+
 const getProducts = async (value) => {
   try {
     const products = await fetchProductsList(value);
@@ -24,16 +32,12 @@ const getProducts = async (value) => {
     });
 
     const buttonCart = document.querySelectorAll('.product__add');
-    const olCart = document.querySelector('.cart__products');
 
     buttonCart.forEach((button) => {
       button.addEventListener('click', async ({ target }) => {
         const { innerText } = target.parentElement.firstElementChild;
-        const dadosProduct = await fetchProduct(innerText);
-
+        await addCart(innerText);
         saveCartID(innerText);
-        const criandoEle = createCartProductElement(dadosProduct);
-        olCart.appendChild(criandoEle);
       });
     });
   } catch (err) {
@@ -46,6 +50,11 @@ const getProducts = async (value) => {
 
 window.onload = async () => {
   await getProducts('computador');
+  const salveProduct = getSavedCartIDs();
+  console.log(salveProduct);
+  salveProduct.forEach(async (id) => {
+    await addCart(id);
+  });
 };
 
 searchButton.addEventListener('click', async () => {
