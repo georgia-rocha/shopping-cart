@@ -7,20 +7,29 @@ import './style.css';
 const searchButton = document.querySelector('#search-products');
 const inputSearch = document.querySelector('#products-input');
 const sectionProducts = document.querySelector('.products');
+const totalPrice = document.querySelector('.total-price');
+const olCart = document.querySelector('.cart__products');
 
 const loading = document.createElement('h2');
 loading.innerHTML = 'carregando...';
 loading.className = 'loading';
 sectionProducts.appendChild(loading);
 
-document.querySelector('.cep-button').addEventListener('click', searchCep);
-const olCart = document.querySelector('.cart__products');
-
 async function addCart(id) {
   const dadosProduct = await fetchProduct(id);
   const criandoEle = createCartProductElement(dadosProduct);
   olCart.appendChild(criandoEle);
 }
+
+async function sumPrice() {
+  const prices = await Promise.all(getSavedCartIDs()
+    .map(async (id) => (await fetchProduct(id)).price));
+  const total = prices.reduce((acc, curr) => acc + curr, 0);
+  totalPrice.innerText = total;
+}
+
+document.querySelector('.cep-button').addEventListener('click', searchCep);
+olCart.addEventListener('click', async () => sumPrice());
 
 const getProducts = async (value) => {
   try {
@@ -38,6 +47,7 @@ const getProducts = async (value) => {
         const { innerText } = target.parentElement.firstElementChild;
         await addCart(innerText);
         saveCartID(innerText);
+        sumPrice();
       });
     });
   } catch (err) {
@@ -51,10 +61,10 @@ const getProducts = async (value) => {
 window.onload = async () => {
   await getProducts('computador');
   const salveProduct = getSavedCartIDs();
-  console.log(salveProduct);
   salveProduct.forEach(async (id) => {
     await addCart(id);
   });
+  await sumPrice();
 };
 
 searchButton.addEventListener('click', async () => {

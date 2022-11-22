@@ -5,7 +5,6 @@ export const fetchProduct = async (id) => {
   try {
     const response = await product(id);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     throw new Error('ID não informado');
