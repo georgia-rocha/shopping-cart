@@ -9,6 +9,13 @@ const inputSearch = document.querySelector('#products-input');
 const sectionProducts = document.querySelector('.products');
 const totalPrice = document.querySelector('.total-price');
 const olCart = document.querySelector('.cart__products');
+const cepInput = document.querySelector('.cep-input');
+const buttonCep = document.querySelector('.cep-button.cart-button');
+const cepSpan = document.querySelector('.cart__address');
+
+buttonCep.addEventListener('click', async () => {
+  cepSpan.innerText = await searchCep(cepInput.value);
+});
 
 const loading = document.createElement('h2');
 loading.innerHTML = 'carregando...';
@@ -28,7 +35,6 @@ async function sumPrice() {
   totalPrice.innerText = total;
 }
 
-document.querySelector('.cep-button').addEventListener('click', searchCep);
 olCart.addEventListener('click', async () => sumPrice());
 
 const getProducts = async (value) => {
