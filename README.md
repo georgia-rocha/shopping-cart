@@ -1,5 +1,5 @@
 ![img](shoppingCart.gif)
-
+[Link deploy](https://georgia-rocha.github.io/shopping-cart/)
 # Para clonar e testar
 
 1 - Clone o repositório com o comando **git clone**:
