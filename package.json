@@ -5,6 +5,8 @@
 "scripts": {
     "start": "vite",
     "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "cy": "cypress run",
