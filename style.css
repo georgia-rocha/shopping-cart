@@ -45,12 +45,6 @@
   cursor: pointer;
 }
 
-.price {
-  display: flex;
-
-  border: 5px solid red !important;
-}
-
 #search-products {
   background-color: rgb(0, 213, 226);
   border: 0;

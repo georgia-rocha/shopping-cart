@@ -1,7 +1,8 @@
-import { searchCep } from './helpers/cepFunctions';
-import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
-import { createProductElement, createCartProductElement } from './helpers/shopFunctions';
-import { saveCartID, getSavedCartIDs } from './helpers/cartFunctions';
+import { searchCep } from './src/helpers/cepFunctions';
+import { fetchProduct, fetchProductsList } from './src/helpers/fetchFunctions';
+import { createProductElement,
+  createCartProductElement } from './src/helpers/shopFunctions';
+import { saveCartID, getSavedCartIDs } from './src/helpers/cartFunctions';
 import './style.css';
 
 const searchButton = document.querySelector('#search-products');
