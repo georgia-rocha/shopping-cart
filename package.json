@@ -2,7 +2,10 @@
   "name": "sd-0x-project-shopping-cart",
   "version": "1.0.0",
   "main": "script.js",
-  "scripts": {
+  "homepage": "https://georgia-rocha.github.io/shopping-cart",
+"scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "vite",
     "dev": "vite --open",
     "test": "jest --watchAll",
