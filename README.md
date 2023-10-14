@@ -36,7 +36,7 @@ O presente projeto teve o intuito de colocar em prática os assuntos abordados n
 
 ## O que foi desenvolvido?
 
-* Foi criado um carrinho de compras dinâmico, com dados consumidos diretamente de uma API e o teste de cobertura das funções da aplicação;
+* Foi criado um site de compras com carrinho de compras dinâmico, com dados consumidos diretamente de uma API e o teste de cobertura das funções da aplicação;
   
 * O projeto veio com uma base de css bruto, onde foi preciso adapdar para ficar mais dinamico e complementar o css para ficar mais organizado e bonito;
 
